@@ -5,11 +5,19 @@ import { MenuItem, OrderItem } from "../types";
 type OrderContentsProps = {
   order: OrderItem[];
   removeItem: (id: MenuItem["id"]) => void;
+  addOneToItem: (id: MenuItem["id"]) => void;
+  restOneToItem: (id: MenuItem["id"]) => void;
 };
+
+// function addItem(id: MenuItem["id"]) {
+//   console.log(id);
+// }
 
 export default function OrderContents({
   order,
   removeItem,
+  addOneToItem,
+  restOneToItem,
 }: OrderContentsProps) {
   return (
     <div>
@@ -29,6 +37,15 @@ export default function OrderContents({
               Cantidad: {item.quantity} -{" "}
               {formatCurrency(item.price * item.quantity)}
             </p>
+            <button
+              className="bg-yellow-600 h-8 w-8 rounded-full text-white font-black"
+              onClick={() => restOneToItem(item.id)}
+            
+            > - </button>
+            <button 
+              className="bg-green-600 h-8 w-8 rounded-full text-white font-black"
+              onClick={() => addOneToItem(item.id)}
+            > + </button>
             <button
               className="bg-red-600 h-8 w-8 rounded-full text-white font-black"
               onClick={() => removeItem(item.id)}

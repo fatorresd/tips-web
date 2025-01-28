@@ -29,12 +29,29 @@ export default function useOrder() {
     setTip(0);
   }
 
+  const addOneToItem = (id: MenuItem['id']) => {
+    setOrder(order.map(item =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    ));
+  };
+
+  const restOneToItem = (id: MenuItem['id']) => {
+    setOrder(order.map(item =>
+      item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+    ));
+    // if (order.find(item => item.id === id)?.quantity === 1) {
+    //   removeItem(id);
+    // }
+  };
+
   return {
     order,
     tip,
     setTip,
     addItem,
     removeItem,
-    placeOrder
+    placeOrder,
+    addOneToItem,
+    restOneToItem
   };
 }
